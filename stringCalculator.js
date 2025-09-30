@@ -15,6 +15,7 @@ class StringCalculator {
     if (parts.length === 1) return parseInt(numbers);
     let sum = 0;
     for(let i=0;i<parts.length;i++){
+      if(parseInt(parts[i]) > 1000) continue;
       sum += parseInt(parts[i]);
     }
     return sum
