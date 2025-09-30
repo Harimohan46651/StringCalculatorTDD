@@ -13,5 +13,8 @@ describe('StringCalculator', () => {
   test('should return same number for a single number in the string', () => {
     expect(calculator.add('1')).toBe(1);
   });
+  test("should return the sum of two numbers seperated by comma", () => {
+  expect(add("1,5")).toBe(6);
+  });
 
 });
