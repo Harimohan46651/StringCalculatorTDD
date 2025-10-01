@@ -1,10 +1,20 @@
 class StringCalculator {
+  escapeRegex(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
   add(numbers){
     if (numbers === "") return 0;
     let delimiter = /[\n,]/;
     if (numbers.startsWith("//")) {
       const parts = numbers.split("\n");
-      delimiter = new RegExp(parts[0].slice(2)); 
+      const delimiterPart = parts[0].slice(2);
+      if (delimiterPart.startsWith("[")) {
+      const delimiters = [...delimiterPart.matchAll(/\[([^\]]+)\]/g)].map(m => this.escapeRegex(m[1]));
+      delimiter = new RegExp(delimiters.join("|"));
+    } else {
+      delimiter = new RegExp(this.escapeRegex(delimiterPart));
+    }
+ 
       numbers = parts[1];
     }
     const parts = numbers.split(delimiter);
